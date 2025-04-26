@@ -1,5 +1,18 @@
 # terraform - Azure
 
+## Env variables
+
+Tells Terraform: "Use the Azure CLI's current login credentials (az login) instead of client secrets, certificates, or service principals.
+```shell
+export ARM_USE_AZURECLI_AUTH=true 
+```
+
+Tells Terraform: "Which Azure subscription you want to target." It's about where the resources will be created.
+
+```shell
+export ARM_SUBSCRIPTION_ID=<subscription_id>
+```
+
 ## Use Azure Resource Provider
 
 
