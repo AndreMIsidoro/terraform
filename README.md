@@ -13,7 +13,24 @@ Tells Terraform: "Which Azure subscription you want to target." It's about where
 export ARM_SUBSCRIPTION_ID=<subscription_id>
 ```
 
-## Use Azure Resource Provider
+## CLI
+
+Display the values of outputs that are explicitly defined in your configuration (either in the root module or within modules)
+
+```shell
+terraform output
+```
+
+Show all resources and their attributes, including any outputs defined in your configuration.
+
+```shell
+terraform show
+```
+
+
+## Syntax
+
+### Use Azure Resource Provider
 
 
 ```hcl
@@ -22,7 +39,7 @@ provider "azurerm"{
 }
 ```
 
-## Create a Resource group
+### Create a Resource group
 
 ```hcl
 resource "azurerm_resource_group" "learn" {
@@ -31,7 +48,7 @@ resource "azurerm_resource_group" "learn" {
 }
 ```
 
-## Create a Virtual Network
+### Create a Virtual Network
 
 ```hcl
 resource "azurerm_virtual_network" "vnet" {
@@ -42,7 +59,7 @@ resource "azurerm_virtual_network" "vnet" {
 }
 ```
 
-## Create a Network Security Group
+### Create a Network Security Group
 
 ```hcl
 resource "azurerm_network_security_group" "nsg" {
@@ -64,7 +81,7 @@ resource "azurerm_network_security_group" "nsg" {
 }
 ```
 
-## Create a Network Interface Card
+### Create a Network Interface Card
 
 ```hcl
 resource "azurerm_network_interface" "nic" {
@@ -80,7 +97,7 @@ resource "azurerm_network_interface" "nic" {
 }
 ```
 
-# # Associate the NIC to the NSG
+### Associate the NIC to the NSG
 
 ```hcl
 resource "azurerm_network_interface_security_group_association" "nic_nsg_assoc" {
