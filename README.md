@@ -55,7 +55,7 @@ resource "azurerm_virtual_machine" "vm" {
 
 
 
-## Syntax
+## Syntax - Configurations
 
 ### Configure Terraform for project
 
@@ -77,6 +77,7 @@ provider "azurerm"{
     features {}
 }
 ```
+## Syntax - General
 
 ### Create a Resource group
 
@@ -86,6 +87,7 @@ resource "azurerm_resource_group" "learn" {
   location = "East US"
 }
 ```
+## Syntax - Networking
 
 ### Create a Virtual Network
 
@@ -144,3 +146,13 @@ resource "azurerm_network_interface_security_group_association" "nic_nsg_assoc" 
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 ```
+
+### Create a public ip
+
+resource "azurerm_public_ip" "lb_public_ip" {
+  name                = "${var.resource_group_name}-lb-pip"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  allocation_method   = "Static"
+  sku                 = "Basic"
+}
