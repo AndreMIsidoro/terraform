@@ -156,3 +156,29 @@ resource "azurerm_public_ip" "lb_public_ip" {
   allocation_method   = "Static"
   sku                 = "Basic"
 }
+
+### Create a loadbalance with a public ip
+
+resource "azurerm_lb" "this" {
+  name                = "${var.resource_group_name}-lb"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  sku                 = "Basic"
+
+  frontend_ip_configuration {
+    name                 = "PublicIPAddress"
+    public_ip_address_id = azurerm_public_ip.this.id
+  }
+}
+
+### Creating a loadbalncer health probe
+
+# Creating Health Probes
+resource "azurerm_lb_probe" "this" {
+  name                            = "${var.resource_group_name}-http-probe"
+  loadbalancer_id                 = azurerm_lb.this.id
+  protocol                        = "Http"
+  port                            = 80
+  request_path                    = "/health"  # HTTP path to check (app needs to respond to this)
+  interval_in_seconds             = 15  # How often to check
+}
