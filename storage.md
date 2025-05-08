@@ -16,3 +16,13 @@ resource "azurerm_storage_account" "example" {
   }
 }
 ```
+
+## Create a Blob Container
+
+```hcl
+resource "azurerm_storage_container" "this" {
+  name                  = "mycontainer"  # Container name (must be lowercase)
+  storage_account_name  = azurerm_storage_account.this.name
+  container_access_type = "private"  # Options: "private", "blob", "container"
+}
+```
