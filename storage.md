@@ -17,7 +17,7 @@ resource "azurerm_storage_account" "example" {
 }
 ```
 
-## Create a Container
+## Create a Storage Container
 
 ```hcl
 resource "azurerm_storage_container" "this" {
