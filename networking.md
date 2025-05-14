@@ -99,6 +99,22 @@ resource "azurerm_public_ip" "lb_public_ip" {
   sku                 = "Basic"
 }
 
+### Create a public ip with dns
+
+```hcl
+resource "azurerm_public_ip" "this" {
+  name                = "${var.resource_group_name}-publicip"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  allocation_method   = "Static"
+  sku                 = "Standard"
+  domain_name_label   = "mygateway" # sets the prefix for the DNS.
+  tags = {
+    environment = "development"
+  }
+}
+```
+
 ## Load Balancer
 
 ### Create a loadbalance with a public ip
