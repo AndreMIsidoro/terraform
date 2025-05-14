@@ -12,6 +12,36 @@ resource "azurerm_virtual_network" "vnet" {
 }
 ```
 
+### Create a Subnet
+```hcl
+resource "azurerm_subnet" "vmss_subnet" {
+  name                 = "vmss_subnet"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.this.name
+  address_prefixes     = ["10.0.2.0/24"]
+}
+```
+
+### Create a Subnet with Delegation
+
+```hcl
+resource "azurerm_subnet" "aci_subnet" {
+  name                 = "aci-subnet"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.this.name
+  address_prefixes     = ["10.0.1.0/24"]
+
+  delegation {
+    name = "aci-delegation"
+
+    service_delegation {
+      name    = "Microsoft.ContainerInstance/containerGroups"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+    }
+  }
+}
+```
+
 ### Create a Network Security Group
 
 ```hcl
