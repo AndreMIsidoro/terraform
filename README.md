@@ -76,6 +76,7 @@ terraform {
 provider "azurerm"{
     features {}
 }
+provider "azuread" {}
 ```
 ## Syntax - General
 
